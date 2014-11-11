@@ -1,0 +1,33 @@
+﻿@using Newtonsoft.Json
+@using CodeFist.Web.Models
+@using Newtonsoft.Json.Serialization
+@model LoginStatus
+@{
+    var settings = new JsonSerializerSettings
+    {
+        Formatting = Formatting.Indented,
+        ContractResolver = new CamelCasePropertyNamesContractResolver(),
+    };
+
+
+    var serializedModel = JsonConvert.SerializeObject(Model, settings);
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>CodeFist Auth</title>
+</head>
+<body>
+    <script type="text/javascript">
+        var result = @Html.Raw(serializedModel);
+        
+        if (window.opener && window.opener._handleLoginResponse) {
+            window.opener._handleLoginResponse(result);
+        }
+
+        window.close();
+    </script>
+</body>
+</html>

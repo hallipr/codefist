@@ -1,0 +1,12 @@
+﻿<h1><a href="#/games/{{bot.gameId}}">{{game.displayName}}</a> / {{bot.displayName}}</h1>
+
+<div class="clearfix">
+    <h2>Source</h2>
+    <div class="btn-group pull-right">
+        <button type="button" class="btn" ng-class="basicEditor ? 'btn-default' : 'btn-active'" ng-click="basicEditor = false">Advanced</button>
+        <button type="button" class="btn" ng-class="basicEditor ? 'btn-active' : 'btn-default'" ng-click="basicEditor = true">Basic</button>
+    </div>
+</div>
+<div ui-codemirror="editorOptions" ng-model="bot.source" ng-if="!basicEditor"></div>
+<pre ng-if="basicEditor" class="editor-basic"><code contenteditable="true" ng-model="bot.source"></code></pre>
+<button ng-click="saveChanges()">Save Changes</button>

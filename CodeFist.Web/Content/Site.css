@@ -1,0 +1,20 @@
+﻿.CodeMirror {
+    border: 1px solid #eee;
+    height: auto;
+    min-height: 1em;
+}
+
+.CodeMirror-scroll {
+    overflow-y: hidden;
+    overflow-x: auto;
+}
+
+.nav, .pagination, .carousel, .panel-title a {
+    cursor: pointer;
+}
+
+.editor-basic {
+    width: 100%;
+    overflow-x: auto;
+    font: 14px monospace;
+}

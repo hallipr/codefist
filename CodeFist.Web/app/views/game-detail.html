@@ -1,0 +1,52 @@
+﻿<h1>{{game.displayName}}</h1>
+<div>
+    <div class="btn-group">
+        <button type="button" ng-repeat="script in scripts" class="btn" ng-class="tabClass(script.name)" ng-click="editScript(script.name)">{{script.label}}</button>
+    </div>
+    <div ng-if='activeScriptName' style="margin-top: 10px;">
+        <div ui-codemirror="editorOptions" ng-model="game[activeScriptName]"></div>
+    </div>
+</div>
+<button type="button" ng-if="isLoggedIn()" ng-click="saveChanges()">Save Changes</button>
+<hr />
+<div>
+    <h1>Bots</h1>
+    <div class="row">
+        <div ng-repeat="bot in bots" class="col-sm-3">
+            <div>
+                <span class="h3"><a href="#/games/{{gameId}}/bots/{{bot.botId}}">{{ bot.displayName }}</a></span>
+                by {{ bot.userName }}
+            </div>
+            <div>
+                {{ bot.wins }} Wins : {{ bot.losses }} Losses
+            </div>
+        </div>
+    </div>
+    <button class="btn btn-default" ng-show="isLoggedIn()" ng-click="createBot()">Create a bot</button>
+</div>
+<hr />
+<div>
+    <h1>Fight!</h1>
+    <div ng-repeat="entry in fightBots">
+        <select ng-model="entry.botId" ng-options="b.botId as b.displayName for b in bots"></select>
+        <a ng-click="fightBots.splice($index, 1)"><i class="glyphicon glyphicon-minus-sign"></i></a>
+    </div>
+    <div>
+        <a ng-click="fightBots.push({ botId: null })"><i class="glyphicon glyphicon-plus-sign"></i></a>
+    </div>
+    <div>
+        <button ng-click="fightLocal()" class="btn btn-warning">LOCAL FIGHT!</button>
+        <button ng-click="fightRanked()" class="btn btn-danger" ng-show="canFightRanked()">RANKED FIGHT!</button>
+    </div>
+</div>
+<hr />
+<div>
+    <h1>Recent Matches</h1>
+    <div ng-repeat="match in matches">
+        <div ng-repeat="bot in match.players" ng-class="{success: bot.winner}">
+            <a href="#/games/{{gameId}}/bots/{{bot.botId}}">{{bot.displayName}}</a> by {{bot.userName}}
+        </div>
+        <a href="#/matches/{{match.id}}">Watch Replay</a>
+        <hr />
+    </div>
+</div>

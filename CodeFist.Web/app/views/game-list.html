@@ -1,0 +1,4 @@
+﻿<div ng-repeat="game in games">
+    <a href="#/games/{{game.id}}" class="thumb">{{game.displayName}}</a>
+</div>
+<button class="btn btn-default" ng-show="isLoggedIn()" ng-click="createGame()">Create a game</button>
