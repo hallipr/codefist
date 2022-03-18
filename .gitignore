@@ -6,6 +6,8 @@
 *.user
 *.sln.docstates
 
+# Just adding a comment
+
 # Build results
 
 [Dd]ebug/
